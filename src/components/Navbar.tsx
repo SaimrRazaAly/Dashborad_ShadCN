@@ -12,13 +12,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ModeToggle } from "./mini_comp/Theme_Toggle";
+import { SidebarTrigger } from "./ui/sidebar";
 // drop down
 
 const Navbar = () => {
   return (
     <nav className=" p-4 flex items-center justify-between">
       {/* LEFT */}
-      Collasap
+    <SidebarTrigger/>
+    {/* we can also make cutom btn using useSideBar Hook */}
       {/* Right */}
       <div className="flex items-center gap-4">
         <Link href={"/"}>Dashboard</Link>

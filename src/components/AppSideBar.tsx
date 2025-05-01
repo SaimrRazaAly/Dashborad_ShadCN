@@ -1,8 +1,11 @@
 import {
   Calendar,
+  ChevronDown,
   ChevronUp,
   Home,
   Inbox,
+  Plus,
+  Projector,
   Search,
   Settings,
   User2,
@@ -11,10 +14,12 @@ import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
+  SidebarGroupAction,
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
+  SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarSeparator,
@@ -29,6 +34,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "./ui/collapsible";
 
 // Menu items.
 const items = [
@@ -61,9 +71,9 @@ const items = [
 
 function AppSideBar() {
   return (
-    <Sidebar>
+    <Sidebar collapsible="icon" className="overflow-x-hidden">
       {/* header */}
-      <SidebarHeader>
+      <SidebarHeader className="py-4">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
@@ -71,17 +81,17 @@ function AppSideBar() {
                 <Image
                   src="/person.jpg"
                   alt="preson"
-                  width={20}
-                  height={20}
-                  className="relative flex size-8 shrink-0 overflow-hidden rounded-full"
+                  width={30}
+                  height={30}
+                  className=" rounded-full"
                 />
                 <span>Saim Raza</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
-      </SidebarHeader>
 
+      </SidebarHeader>
       <SidebarSeparator />
       {/* main content or body */}
       <SidebarContent>
@@ -97,17 +107,87 @@ function AppSideBar() {
                       <span>{item.title}</span>
                     </a>
                   </SidebarMenuButton>
+                  {item.title === "Inbox" && (
+                    <SidebarMenuBadge>25</SidebarMenuBadge>
+                  )}
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>Projects</SidebarGroupLabel>
+
+          <SidebarGroupAction>
+            <Plus /> <span className="sr-only">Add Projects</span>
+          </SidebarGroupAction>
+
+          <SidebarContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link href={"/"}>
+                    <Projector />
+                    <span>All Projects</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link href={"/"}>
+                    <Plus />
+                    <span>Add Project</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarContent>
+        </SidebarGroup>
+
+        <Collapsible defaultOpen className="group/collapsible">
+          <SidebarGroup>
+            <SidebarGroupLabel asChild>
+              <CollapsibleTrigger>
+                Help
+                <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
+              </CollapsibleTrigger>
+            </SidebarGroupLabel>
+
+            {/* <SidebarGroupAction>
+              <Plus /> <span className="sr-only">Add Projects</span>
+            </SidebarGroupAction> */}
+            <CollapsibleContent>
+              <SidebarContent>
+                <SidebarMenu>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild>
+                      <Link href={"/"}>
+                        <Projector />
+                        <span>All Projects</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild>
+                      <Link href={"/"}>
+                        <Plus />
+                        <span>Add Project</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </SidebarMenu>
+              </SidebarContent>
+            </CollapsibleContent>
+          </SidebarGroup>
+        </Collapsible>
       </SidebarContent>
       {/* Footer */}
 
       <SidebarMenu>
         <SidebarMenu>
           <SidebarMenuItem>
+            {/* Drop Down */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton>
