@@ -90,7 +90,6 @@ function AppSideBar() {
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
-
       </SidebarHeader>
       <SidebarSeparator />
       {/* main content or body */}
@@ -185,24 +184,26 @@ function AppSideBar() {
       {/* Footer */}
 
       <SidebarMenu>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            {/* Drop Down */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuButton>
-                  <User2 /> Saim <ChevronUp className="ml-auto" />
-                </SidebarMenuButton>
-              </DropdownMenuTrigger>
+        <SidebarContent>
+          <SidebarGroup>
+            <SidebarMenuItem>
+              {/* Drop Down */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <SidebarMenuButton>
+                    <User2 /> Saim <ChevronUp className="ml-auto" />
+                  </SidebarMenuButton>
+                </DropdownMenuTrigger>
 
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem>Account </DropdownMenuItem>
-                <DropdownMenuItem>Setting</DropdownMenuItem>
-                <DropdownMenuItem>Sign up</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </SidebarMenuItem>
-        </SidebarMenu>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem>Account </DropdownMenuItem>
+                  <DropdownMenuItem>Setting</DropdownMenuItem>
+                  <DropdownMenuItem>Sign up</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </SidebarMenuItem>
+          </SidebarGroup>
+        </SidebarContent>
       </SidebarMenu>
     </Sidebar>
   );
