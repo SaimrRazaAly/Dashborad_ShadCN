@@ -1,6 +1,7 @@
 import { AppBarChart } from "@/components/AppBarChart";
 import AppBarGraidentChart from "@/components/AppBarGradientChart";
 import AppBarPieChart from "@/components/AppBarPieChart";
+import CardList from "@/components/CardList";
 import React from "react";
 
 const Home = () => {
@@ -10,14 +11,19 @@ const Home = () => {
         <AppBarChart />
       </div>
       <div className="bg-primary-foreground p-4 rounded-lg ">
+        {" "}
+        <CardList title="Latest Transactions" />
+      </div>
+      <div className="bg-primary-foreground p-4 rounded-lg ">
         <AppBarPieChart />
       </div>
-      <div className="bg-primary-foreground p-4 rounded-lg ">1</div>
       <div className="bg-primary-foreground p-4 rounded-lg ">1</div>
       <div className="bg-primary-foreground p-4 rounded-lg  lg:col-span-2 xl:col-span-1 2xl:col-span-2 ">
         <AppBarGraidentChart />
       </div>
-      <div className="bg-primary-foreground p-4 rounded-lg ">1</div>
+      <div className="bg-primary-foreground p-4 rounded-lg ">
+        <CardList title="Popular Content" />
+      </div>
     </div>
   );
 };
