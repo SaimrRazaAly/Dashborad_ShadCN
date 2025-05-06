@@ -34,9 +34,9 @@ const chartConfig = {
 export function AppBarChart() {
   return (
     <div>
-      <h2 className="mb-4 text-lg">Total Revenue</h2>
+      <h2 className="text-lg font-medium mb-6">Total Revenue</h2>
 
-      <ChartContainer config={chartConfig} className="min-h-[300px] w-full">
+      <ChartContainer config={chartConfig} className="min-h-[400px]  w-full">
         <BarChart accessibilityLayer data={chartData}>
           <CartesianGrid vertical={false} />
 

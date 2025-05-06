@@ -32,7 +32,7 @@ const chartConfig = {
 function AppBarGraidentChart() {
   return (
     <div>
-      <h2 className="mb-4 text-lg">Total Revenue</h2>
+      <h2 className="text-lg font-medium mb-6">Total Revenue</h2>
       <ChartContainer config={chartConfig}>
         <AreaChart
           accessibilityLayer

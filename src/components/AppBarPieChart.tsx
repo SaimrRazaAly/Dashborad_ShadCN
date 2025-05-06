@@ -59,7 +59,7 @@ function AppBarPieChart() {
 
   return (
     <div>
-      <h2>Borwser usage</h2>
+      <h2 className="text-lg font-medium mb-6">Borwser usage</h2>
 
       <CardContent className="flex-1 pb-0">
         <ChartContainer
