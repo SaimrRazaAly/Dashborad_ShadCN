@@ -9,7 +9,7 @@ import {
   
 
   interface UserNamePros {
-    username:string
+    username?:string
   }
 
 const Mini_Navigator = ({username}:UserNamePros) => {
@@ -25,7 +25,7 @@ const Mini_Navigator = ({username}:UserNamePros) => {
       </BreadcrumbItem>
       <BreadcrumbSeparator />
       <BreadcrumbItem>
-        <BreadcrumbPage>{username}</BreadcrumbPage>
+        <BreadcrumbPage>{username ? username : "Saim Raza"}</BreadcrumbPage>
       </BreadcrumbItem>
     </BreadcrumbList>
   </Breadcrumb>
