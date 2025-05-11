@@ -1,7 +1,14 @@
 import CardList from "@/components/CardList";
 import Mini_Navigator from "@/components/mini_comp/Mini_Navigator";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { BadgeCheck } from "lucide-react";
+import { AvatarFallback } from "@/components/ui/avatar";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import { iconData } from "@/constants";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { UserLineChart } from "@/components/UserLineChart";
 
 interface SingleUserProps {
   params: {
@@ -22,16 +29,26 @@ const SingleUser = async ({ params }: SingleUserProps) => {
             {/* USER BADGE */}
             <h2 className="text-xl font-semibold">User Badge</h2>
 
-            <div className="flex gap-4 mt-4">
-              <HoverCard>
-                <HoverCardTrigger>
-                  <BadgeCheck size={36} className="rounded-full bg-blue-500/30 border  border-blue-500/50 p-2"/>
-                </HoverCardTrigger>
-                <HoverCardContent>
-                  <h1 className="mb-2 font-bold">Verified User</h1>
-                  <p className=" text-sm text-muted-foreground">This user has been Verified by the admin</p>
-                </HoverCardContent>
-              </HoverCard>
+            <div className="flex gap-4 mt-4 flex-wrap">
+              {iconData.map((item, index) => {
+                const IconComponent = item.icon;
+                return (
+                  <HoverCard key={index} openDelay={300} closeDelay={200}>
+                    <HoverCardTrigger>
+                      <IconComponent
+                        size={36}
+                        className={`rounded-full border p-2 ${item.color}`}
+                      />
+                    </HoverCardTrigger>
+                    <HoverCardContent>
+                      <h1 className="mb-2 font-bold">{item.title}</h1>
+                      <p className="text-sm text-muted-foreground">
+                        {item.desc}
+                      </p>
+                    </HoverCardContent>
+                  </HoverCard>
+                );
+              })}
             </div>
           </div>
 
@@ -47,9 +64,30 @@ const SingleUser = async ({ params }: SingleUserProps) => {
         </div>
         {/* RIGHT */}
         <div className="w-full xl:w-2/3 space-y-6">
-          <div className="p-4 rounded-lg bg-primary-foreground">USER CARD</div>
+          <div className="p-4 rounded-lg bg-primary-foreground space-y-2 ">
+            <div className="flex items-center gap-2">
+              <Avatar>
+                <AvatarImage
+                  src={
+                    "http://localhost:3000/_next/image?url=%2Fperson.jpg&w=32&q=75"
+                  }
+                />
+                <AvatarFallback>SR</AvatarFallback>
+              </Avatar>
+              <h1 className="text-xl font-semibold">Saim Raza</h1>
+            </div>
 
-          <div className="p-4 rounded-lg bg-primary-foreground">CHARTS</div>
+            <p className="text-sm text-muted-foreground">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores
+              dolorem ab consequatur incidunt at rem nesciunt quisquam dolor, ut
+              sint?
+            </p>
+          </div>
+
+          <div className="p-4 rounded-lg bg-primary-foreground">
+                 <h2 className="text-xl font-semibold">User Activity</h2>
+            <UserLineChart />
+          </div>
         </div>
       </div>
     </div>

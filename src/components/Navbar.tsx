@@ -1,4 +1,4 @@
-import { LogOut, Moon, Settings, User } from "lucide-react";
+import { Settings, User } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
@@ -13,14 +13,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ModeToggle } from "./mini_comp/Theme_Toggle";
 import { SidebarTrigger } from "./ui/sidebar";
+import LogOutComponent from "./mini_comp/LogOut";
 // drop down
 
 const Navbar = () => {
   return (
     <nav className=" p-4 flex items-center justify-between">
       {/* LEFT */}
-    <SidebarTrigger/>
-    {/* we can also make cutom btn using useSideBar Hook */}
+      <SidebarTrigger />
+      {/* we can also make cutom btn using useSideBar Hook */}
       {/* Right */}
       <div className="flex items-center gap-4">
         <Link href={"/"}>Dashboard</Link>
@@ -43,9 +44,7 @@ const Navbar = () => {
             <DropdownMenuItem>
               <Settings className="h-[1.2rem] w-[1.2rem] mr-2" /> Setting
             </DropdownMenuItem>
-            <DropdownMenuItem variant="destructive">
-              <LogOut className="h-[1.2rem] w-[1.2rem] mr-2" /> Logout
-            </DropdownMenuItem>
+            <LogOutComponent />
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

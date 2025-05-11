@@ -43,7 +43,7 @@ const TodoList = () => {
 
       {/* LIST */}
       <ScrollArea
-        className="max-h-[300px] overflow-y-auto mt-4  [&::-webkit-scrollbar]:w-2
+        className="max-h-[300px] 2xl:min-h-[400px] overflow-y-auto mt-4  [&::-webkit-scrollbar]:w-2
   [&::-webkit-scrollbar-thumb]:rounded-full
   [&::-webkit-scrollbar-track]:bg-transparent
   [&::-webkit-scrollbar-thumb]:bg-gray-300
