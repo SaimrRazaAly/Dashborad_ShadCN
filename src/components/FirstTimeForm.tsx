@@ -1,10 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-interface FormData {
+import { useUserContext } from "@/providers/User_Data";
+import Image from "next/image";
+
+export interface FormData {
   name: string;
   email: string;
   password: string;
@@ -17,38 +20,45 @@ export default function SimpleForm({
 }: {
   onSubmit: (data: FormData) => void;
 }) {
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
-    password: "",
-    address: "",
-    imageUrl: undefined,
-  });
+  const { setUserData, userData } = useUserContext();
+
+  // useEffect(() => {
+  //   console.log("userData updated:", userData);
+  // }, [userData]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
+    setUserData((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
+    const file = e.target.files?.[0];
+    if (file) {
+      const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
+      if (!allowedTypes.includes(file.type)) {
+        alert("Only JPG, JPEG, and PNG files are allowed.");
+        e.target.value = "";
+        return;
+      }
+
       const reader = new FileReader();
       reader.onloadend = () => {
-        setFormData((prev) => ({
+        setUserData((prev) => ({
           ...prev,
           imageUrl: reader.result as string,
         }));
       };
-      reader.readAsDataURL(e.target.files[0]);
+      reader.readAsDataURL(file);
     }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData); // Pass form data when submitting
+    onSubmit(userData);
+
   };
 
   return (
@@ -59,103 +69,73 @@ export default function SimpleForm({
       <h2 className="text-xl font-bold mb-4">Complete Your Profile</h2>
 
       <div>
-        <Label htmlFor="name" className="mb-2">
-          Name
-        </Label>
+        <Label htmlFor="name">Name</Label>
         <Input
           id="name"
           name="name"
           type="text"
-          value={formData.name}
+          value={userData.name}
           onChange={handleChange}
           required
         />
       </div>
 
       <div>
-        <Label htmlFor="email" className="mb-2">
-          Email
-        </Label>
+        <Label htmlFor="email">Email</Label>
         <Input
           id="email"
           name="email"
           type="email"
-          value={formData.email}
+          value={userData.email}
           onChange={handleChange}
           required
         />
       </div>
 
       <div>
-        <Label htmlFor="password" className="mb-2">
-          Password
-        </Label>
+        <Label htmlFor="password">Password</Label>
         <Input
           id="password"
           name="password"
           type="password"
           minLength={8}
-          value={formData.password}
+          value={userData.password}
           onChange={handleChange}
           required
         />
       </div>
+
       <div>
-        <Label htmlFor="address" className="mb-2">
-          address
-        </Label>
+        <Label htmlFor="address">Address</Label>
         <Input
           id="address"
           name="address"
           type="text"
-          value={formData.address}
+          value={userData.address}
           onChange={handleChange}
           required
         />
       </div>
 
-      {/* Image Upload */}
       <div>
-        <Label htmlFor="image" className="mb-2">
-          Profile Image
-        </Label>
+        <Label htmlFor="image">Profile Image</Label>
         <Input
           id="image"
           name="image"
           type="file"
-          accept=".jpg,.jpeg,.png,image/jpeg,image/png"
           required
-          onChange={(e) => {
-            const file = e.target.files?.[0];
-            if (file) {
-              const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
-              if (!allowedTypes.includes(file.type)) {
-                alert("Only JPG, JPEG, and PNG files are allowed.");
-                e.target.value = ""; // Reset input
-                return;
-              }
-
-              const reader = new FileReader();
-              reader.onloadend = () => {
-                setFormData((prev) => ({
-                  ...prev,
-                  imageUrl: reader.result as string,
-                }));
-              };
-              reader.readAsDataURL(file);
-            }
-          }}
+          accept=".jpg,.jpeg,.png,image/jpeg,image/png"
+          onChange={handleImageChange}
         />
-
-        {/* {formData.imageUrl && (
+        {userData.imageUrl && (
           <Image
-            src={formData.imageUrl}
+            src={userData.imageUrl}
             alt="Profile Image Preview"
             width={100}
             height={100}
             className="mt-2 mx-auto object-cover rounded-full"
           />
-        )} */}
+        )}
       </div>
 
       <Button type="submit" className="w-full">

@@ -2,14 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import FirstTimeForm from "@/components/FirstTimeForm";
-import type { Metadata } from "next";
+import SimpleForm, { FormData } from "@/components/FirstTimeForm";
 
 // Register Page Component
-
-export const metadata: Metadata = {
-  title: "Register",
-};
 const RegisterPage = () => {
   const router = useRouter();
 
@@ -22,23 +17,21 @@ const RegisterPage = () => {
   }, [router]);
 
   // Handle form submission
-  const handleSubmit = (data: any) => {
-    // Save form submission flag to localStorage
+  const handleSubmit = () => {
+    // Store the form submission flag in localStorage
     localStorage.setItem("firstTimeFormSubmitted", "true");
+    // console.log("Form Data Submitted:", formData);
 
-    // Optionally save form data to the backend here
-    // Example: saveUserData(data);
-
-    // Redirect user to the dashboard after successful registration
+    // Redirect to the dashboard
     router.replace("/dashboard");
   };
 
   return (
     <div className="max-w-4xl mx-auto">
       <h1 className="text-2xl font-semibold text-center mt-10 mb-6">
-        ️ Register ️‍🔥
+        Register ️‍🔥
       </h1>
-      <FirstTimeForm onSubmit={handleSubmit} />
+      <SimpleForm onSubmit={handleSubmit} />
     </div>
   );
 };

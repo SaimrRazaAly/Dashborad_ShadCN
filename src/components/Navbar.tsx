@@ -1,7 +1,8 @@
+"use client";
 import { Settings, User } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-
+import { useUserContext } from "@/providers/User_Data";
 // drop down
 import {
   DropdownMenu,
@@ -17,6 +18,8 @@ import LogOutComponent from "./mini_comp/LogOut";
 // drop down
 
 const Navbar = () => {
+
+  const {userData} = useUserContext();
   return (
     <nav className=" p-4 flex items-center justify-between">
       {/* LEFT */}
@@ -30,7 +33,7 @@ const Navbar = () => {
           <DropdownMenuTrigger>
             {" "}
             <Avatar>
-              <AvatarImage src="https://avatars.githubusercontent.com/u/140326161?v=4" />
+              <AvatarImage src={userData.imageUrl} />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>

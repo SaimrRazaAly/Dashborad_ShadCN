@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Calendar,
   ChevronDown,
@@ -30,8 +32,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import {
@@ -39,60 +39,42 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "./ui/collapsible";
+import { useUserContext } from "@/providers/User_Data";
 
-// Menu items.
 const items = [
-  {
-    title: "Home",
-    url: "#",
-    icon: Home,
-  },
-  {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
-  },
-  {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
-  },
+  { title: "Home", url: "#", icon: Home },
+  { title: "Inbox", url: "#", icon: Inbox },
+  { title: "Calendar", url: "#", icon: Calendar },
+  { title: "Search", url: "#", icon: Search },
+  { title: "Settings", url: "#", icon: Settings },
 ];
 
 function AppSideBar() {
+  const { userData } = useUserContext();
+
   return (
     <Sidebar collapsible="icon" className="overflow-x-hidden">
-      {/* header */}
       <SidebarHeader className="py-4">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
               <Link href={"/"}>
                 <Image
-                  src="/person.jpg"
-                  alt="preson"
+                  src={userData.imageUrl || "/person.jpg"}
+                  alt="profile"
                   width={30}
                   height={30}
-                  className=" rounded-full"
+                  className="rounded-full"
                 />
-                <span>Saim Raza</span>
+                <span>{userData.name || "Guest"}</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
+
       <SidebarSeparator />
-      {/* main content or body */}
+
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
@@ -106,9 +88,7 @@ function AppSideBar() {
                       <span>{item.title}</span>
                     </a>
                   </SidebarMenuButton>
-                  {item.title === "Inbox" && (
-                    <SidebarMenuBadge>25</SidebarMenuBadge>
-                  )}
+                  {item.title === "Inbox" && <SidebarMenuBadge>25</SidebarMenuBadge>}
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
@@ -117,11 +97,9 @@ function AppSideBar() {
 
         <SidebarGroup>
           <SidebarGroupLabel>Projects</SidebarGroupLabel>
-
           <SidebarGroupAction>
             <Plus /> <span className="sr-only">Add Projects</span>
           </SidebarGroupAction>
-
           <SidebarContent>
             <SidebarMenu>
               <SidebarMenuItem>
@@ -152,10 +130,6 @@ function AppSideBar() {
                 <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
               </CollapsibleTrigger>
             </SidebarGroupLabel>
-
-            {/* <SidebarGroupAction>
-              <Plus /> <span className="sr-only">Add Projects</span>
-            </SidebarGroupAction> */}
             <CollapsibleContent>
               <SidebarContent>
                 <SidebarMenu>
@@ -181,22 +155,19 @@ function AppSideBar() {
           </SidebarGroup>
         </Collapsible>
       </SidebarContent>
-      {/* Footer */}
 
       <SidebarMenu>
         <SidebarContent>
           <SidebarGroup>
             <SidebarMenuItem>
-              {/* Drop Down */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <SidebarMenuButton>
-                    <User2 /> Saim <ChevronUp className="ml-auto" />
+                    <User2 /> {userData.name || "Guest"} <ChevronUp className="ml-auto" />
                   </SidebarMenuButton>
                 </DropdownMenuTrigger>
-
                 <DropdownMenuContent align="end">
-                  <DropdownMenuItem>Account </DropdownMenuItem>
+                  <DropdownMenuItem>Account</DropdownMenuItem>
                   <DropdownMenuItem>Setting</DropdownMenuItem>
                   <DropdownMenuItem>Sign up</DropdownMenuItem>
                 </DropdownMenuContent>
